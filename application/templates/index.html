@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Library
+{% endblock %}
+
+{% block content %}
+<h1>Hello!</h1>
+{% for book in books %}
+<div>
+    <p>book.title</p>
+    <p>book.author</p>
+</div>
+{% endfor %}
+{% endblock %}
