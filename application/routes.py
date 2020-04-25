@@ -1,17 +1,26 @@
+import os
 from flask import render_template, flash, redirect, url_for, request
 from flask_login import current_user, login_user, logout_user
+from werkzeug.utils import secure_filename
 from werkzeug.urls import url_parse
 from application import app, db
-from application.forms import LoginForm, RegistrationForm
+from application.forms import LoginForm, RegistrationForm, AddBookForm
 from application.models import User, Book
 
 @app.route("/")
-@app.route("/index")
+@app.route("/index", methods=['GET', 'POST'])
 def index():
-    if current_user.is_anonymous:
+    if not current_user.is_authenticated:
         return render_template('landing.html')
+    form = AddBookForm()
+    if form.validate_on_submit():
+        image = form.image.data
+        book = Book(title=form.title.data, author=form.author.data,
+                image=image, user_id=current_user.id)
+        db.session.add(book)
+        db.session.commit()
     books = Book.query.filter_by(owner=current_user)
-    return render_template("index.html", books=books)
+    return render_template("index.html", books=books, form=form)
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
@@ -48,4 +57,3 @@ def register():
         flash("Registration complete!", "success")
         return redirect(url_for('login'))
     return render_template('register.html', form=form)
-

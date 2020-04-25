@@ -6,10 +6,54 @@ Library
 
 {% block content %}
 <h1>Hello!</h1>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    Add
+</button>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" 
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Book</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+             </div>
+            <div class="modal-body">
+                <form action="" method="post" enctype="multipart/formdata" novalidate>
+                    {{ form.hidden_tag() }}
+                    <p>
+                        {{ form.title.label }}<br>
+                        {{ form.title(size=32) }}
+                        {% for error in form.title.errors %}
+                        <span style="color :red;">{{ error }}</span>
+                        {% endfor %}
+                    </p>
+                    <p>
+                        {{ form.author.label }}<br>
+                        {{ form.author(size=32) }}
+                        {% for error in form.author.errors %}
+                        <span style="color: red;">{{ error }}</span>
+                        {% endfor %}
+                    </p>
+                    <p>
+                        {{ form.image.label }}<br>
+                        {{ form.image }}
+                        {% for error in form.image.errors %}
+                        <span style="color: red;">{{ error }}</span>
+                        {% endfor %}
+                    </p>
+                    <p>{{ form.submit() }}</p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 {% for book in books %}
 <div>
-    <p>book.title</p>
-    <p>book.author</p>
+    <p>{{ book.title }}</p>
+    <p>{{ book.author }}</p>
 </div>
 {% endfor %}
 {% endblock %}

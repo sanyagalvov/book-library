@@ -1,4 +1,6 @@
 from flask_wtf import FlaskForm
+from flask_wtf.file import FileField, FileRequired, FileAllowed
+from werkzeug.utils import secure_filename
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired, ValidationError, Email, EqualTo
 from application.models import User
@@ -26,3 +28,11 @@ class RegistrationForm(FlaskForm):
         user = User.query.filter_by(email=email.data).first()
         if user is not None:
             raise ValidationError('Please use a different email address.')
+
+class AddBookForm(FlaskForm):
+    title = StringField("Book's title", validators=[DataRequired()])
+    author = StringField("Book's author", validators=[DataRequired()])
+    image = StringField("Image's url",
+            validators=[FileAllowed(["png", "jpeg", "jpg"], "Images only!")])
+    submit = SubmitField("Add")
+
