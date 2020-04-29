@@ -57,3 +57,15 @@ def register():
         flash("Registration complete!", "success")
         return redirect(url_for('login'))
     return render_template('register.html', form=form)
+
+@app.route("/add", methods=['GET', 'POST'])
+def add():
+    form = AddBookForm()
+    if form.validate_on_submit():
+        image = form.image.data
+        book = Book(title=form.title.data, author=form.author.data,
+                image=image, user_id=current_user.id)
+        db.session.add(book)
+        db.session.commit()
+        return redirect(url_for("index"))
+    return render_template("add.html", form=form)
