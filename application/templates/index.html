@@ -5,7 +5,6 @@ Library
 {% endblock %}
 
 {% block content %}
-<a class="btn btn-primary" href="{{ url_for("add") }}" role="button">Add</a>
 {% for book in books %}
 <div class="card" style="width: 18rem;">
     <img src="{{ book.image }}" class="card-img-top" alt="...">

@@ -25,9 +25,10 @@
             </a>
             {% if current_user.is_anonymous %}
             <a class="nav-link" href="{{ url_for('login') }}">Login</a>
-            <a href="{{ url_for('register') }}">Register</a>
+            <a class="nav-link" href="{{ url_for('register') }}">Register</a>
             {% else %}
-            <a href="{{ url_for('logout') }}">Logout</a>
+            <a class="nav-link" href="{{ url_for("add") }}" role="button">Add</a>
+            <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
             {% endif %}
         </nav>
         {% with messages = get_flashed_messages(with_categories=true) %}
