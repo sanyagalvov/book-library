@@ -89,4 +89,18 @@ def book(id):
             db.session.delete(book)
             db.session.commit()
             return redirect(url_for("index"))
+        else:
+            return redirect(url_for("edit", id=book.id))
     return render_template("book.html", book=book, form=form)
+
+@app.route("/edit/<int:id>", methods=["GET", "POST"])
+def edit(id):
+    book = Book.query.filter_by(id=id).first()
+    form = AddBookForm(obj=book)
+    if form.validate_on_submit():
+        book.title = form.title.data
+        book.author = form.author.data
+        book.image = form.image.data
+        db.session.commit()
+        return redirect(url_for("book", id=book.id))
+    return render_template("edit.html", form=form)
