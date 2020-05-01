@@ -21,13 +21,13 @@
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="{{ url_for('index') }}">
-                <img src="static/logo.png" height="30" alt="">
+                <img src="/static/logo.png" height="30" alt="">
             </a>
             {% if current_user.is_anonymous %}
             <a class="nav-link" href="{{ url_for('login') }}">Login</a>
             <a class="nav-link" href="{{ url_for('register') }}">Register</a>
             {% else %}
-            <a class="nav-link" href="{{ url_for("add") }}" role="button">Add</a>
+            {% block widget %}{% endblock %}
             <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
             {% endif %}
         </nav>

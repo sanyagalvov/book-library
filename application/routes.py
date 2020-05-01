@@ -1,24 +1,25 @@
 import os
+import requests as req
 from flask import render_template, flash, redirect, url_for, request
 from flask_login import current_user, login_user, logout_user
 from werkzeug.utils import secure_filename
 from werkzeug.urls import url_parse
 from application import app, db
-from application.forms import LoginForm, RegistrationForm, AddBookForm
+from application.forms import LoginForm, RegistrationForm
+from application.forms import AddBookForm, ISBNAddForm, EditDeleteForm
 from application.models import User, Book
+from application.isbn import get_book_by_isbn
 
 @app.route("/")
 @app.route("/index", methods=['GET', 'POST'])
 def index():
     if not current_user.is_authenticated:
         return render_template('landing.html')
-    form = AddBookForm()
+    form = ISBNAddForm()
     if form.validate_on_submit():
-        image = form.image.data
-        book = Book(title=form.title.data, author=form.author.data,
-                image=image, user_id=current_user.id)
-        db.session.add(book)
-        db.session.commit()
+        if form.isbn.data == "" or form.manual.data:
+            return redirect(url_for("add"))
+        return redirect(url_for("add", isbn=form.isbn.data))
     books = Book.query.filter_by(owner=current_user)
     return render_template("index.html", books=books, form=form)
 
@@ -58,9 +59,18 @@ def register():
         return redirect(url_for('login'))
     return render_template('register.html', form=form)
 
-@app.route("/add", methods=['GET', 'POST'])
-def add():
-    form = AddBookForm()
+@app.route("/add", defaults={"isbn": None}, methods=['GET', 'POST'])
+@app.route("/add/<string:isbn>", methods=['GET', 'POST'])
+def add(isbn):
+    if isbn:
+        book = get_book_by_isbn(isbn)
+        if book:
+            form = AddBookForm(obj=book)
+        else:
+            flash("Book was not found! :( Please add this book manually.", "danger")
+            form = AddBookForm()
+    else:
+        form = AddBookForm()
     if form.validate_on_submit():
         image = form.image.data
         book = Book(title=form.title.data, author=form.author.data,
