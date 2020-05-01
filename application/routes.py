@@ -79,3 +79,14 @@ def add(isbn):
         db.session.commit()
         return redirect(url_for("index"))
     return render_template("add.html", form=form)
+
+@app.route("/book/<int:id>", methods=["GET", "POST"])
+def book(id):
+    form = EditDeleteForm()
+    book = Book.query.filter_by(id=id).first()
+    if form.validate_on_submit():
+        if form.delete.data:
+            db.session.delete(book)
+            db.session.commit()
+            return redirect(url_for("index"))
+    return render_template("book.html", book=book, form=form)

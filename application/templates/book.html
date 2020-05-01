@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block title %}
+{{ book.title }}
+{% endblock %}
+
+{% block widget %}
+<form action="" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    <input id="edit" name="edit" type="submit" value="Edit" class="btn btn-outline-info">
+    <input id="delete" name="delete" type="submit" value="Delete" class="btn btn-outline-danger">
+</form>
+{% endblock %}
+
+{% block content %}
+<img src="{{ book.image }}" class="" alt="...">
+<h4>{{ book.title }}</h4>
+<h5>{{ book.author }}</h5>
+{% endblock %}

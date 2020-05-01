@@ -47,9 +47,10 @@ Library
     <img src="{{ book.image }}" class="card-img-top" alt="...">
     <div class="card-body">
         <h5 class="card-title">{{ book.title }}</h5>
-            <p class="card-text">
-                {{ book.author }}
-            </p>
+        <p class="card-text">
+            {{ book.author }}
+        </p>
+        <a href="{{ url_for("book", id=book.id) }}" class="card-link stretched-link">Open</a>
     </div>
 </div>
 {% endfor %}

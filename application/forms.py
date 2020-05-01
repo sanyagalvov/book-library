@@ -41,3 +41,6 @@ class ISBNAddForm(FlaskForm):
     submit = SubmitField("Add via ISBN")
     manual = SubmitField("Add Manually")
 
+class EditDeleteForm(FlaskForm):
+    edit = SubmitField("Edit")
+    delete = SubmitField("Delete")
