@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired, FileAllowed
 from werkzeug.utils import secure_filename
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired, ValidationError, Email, EqualTo
 from application.models import User
 
@@ -34,6 +34,7 @@ class AddBookForm(FlaskForm):
     author = StringField("Book's author", validators=[DataRequired()])
     image = StringField("Image's url",
             validators=[FileAllowed(["png", "jpeg", "jpg"], "Images only!")])
+    description = TextAreaField("Notes")
     submit = SubmitField("Add")
 
 class ISBNAddForm(FlaskForm):

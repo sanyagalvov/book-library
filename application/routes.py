@@ -1,7 +1,7 @@
 import os
 import requests as req
 from flask import render_template, flash, redirect, url_for, request
-from flask_login import current_user, login_user, logout_user
+from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.utils import secure_filename
 from werkzeug.urls import url_parse
 from application import app, db
@@ -74,16 +74,19 @@ def add(isbn):
     if form.validate_on_submit():
         image = form.image.data
         book = Book(title=form.title.data, author=form.author.data,
-                image=image, user_id=current_user.id)
+                image=image, user_id=current_user.id, description=form.description.data)
         db.session.add(book)
         db.session.commit()
         return redirect(url_for("index"))
     return render_template("add.html", form=form)
 
 @app.route("/book/<int:id>", methods=["GET", "POST"])
+@login_required
 def book(id):
     form = EditDeleteForm()
     book = Book.query.filter_by(id=id).first()
+    if book.user_id != current_user.id:
+        return redirect(url_for("index"))
     if form.validate_on_submit():
         if form.delete.data:
             db.session.delete(book)
@@ -101,6 +104,7 @@ def edit(id):
         book.title = form.title.data
         book.author = form.author.data
         book.image = form.image.data
+        book.description = form.description.data
         db.session.commit()
         return redirect(url_for("book", id=book.id))
-    return render_template("edit.html", form=form)
+    return render_template("add.html", form=form)

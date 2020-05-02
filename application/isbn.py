@@ -19,9 +19,14 @@ def get_book_by_isbn(isbn):
 
         title = request_data[f"ISBN:{isbn_code}"]["title"]
         image = request_data[f"ISBN:{isbn_code}"]["cover"]["large"]
-        author = request_data[f"ISBN:{isbn_code}"]["authors"][0]["name"]
 
-        book = Book(title=title, author=author, image=image,
+        authors = "; "
+        author_list = []
+        for author in request_data[f"ISBN:{isbn_code}"]["authors"]:
+            author_list.append(author["name"])
+        authors = authors.join(author_list)
+
+        book = Book(title=title, author=authors, image=image,
                 user_id=current_user.id)
         return book
     return None

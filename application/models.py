@@ -23,8 +23,9 @@ class User(UserMixin, db.Model):
 class Book(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(140))
-    author = db.Column(db.String(140))
+    author = db.Column(db.String(280))
     image = db.Column(db.String(300))
+    description = db.Column(db.String(1000))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 

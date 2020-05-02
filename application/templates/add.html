@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block title %}
-Add Book
+Edit Book
 {% endblock %}
 
 {% block content %}
@@ -29,6 +29,10 @@ Add Book
     {% for error in form.image.errors %}
     <span style="color: red;">{{ error }}</span>
     {% endfor %}
+    </p>
+    <p>
+    {{ form.description.label }}<br>
+    {{ form.description() }}
     </p>
     <p>{{ form.submit() }}</p>
 </form>
