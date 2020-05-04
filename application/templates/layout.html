@@ -13,7 +13,7 @@
 
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <!-- https://favicon.io/emoji-favicons/money-mouth-face/ -->
-        <link href="/static/favicon.ico" rel="icon">
+        <link href="/static/favicon-v2.ico" rel="icon">
         <!-- <link href="/static/styles.css" rel="stylesheet"> -->
         
         <title>{% block title %}{% endblock %}</title>
@@ -21,7 +21,7 @@
     <body>
         <nav class="navbar sticky-top border-bottom navbar-expand navbar-light bg-light">
             <a class="navbar-brand" href="{{ url_for('index') }}">
-                <img src="/static/logo.png" height="30" alt="">
+                <img src="/static/logo-v2.png" height="30" alt="">
             </a>
             {% if current_user.is_anonymous %}
             <a class="nav-link" href="{{ url_for('login') }}">Login</a>
