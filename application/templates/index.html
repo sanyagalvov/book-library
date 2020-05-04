@@ -9,8 +9,9 @@ Library
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
     Add
 </button>
-
+{% endblock %}
 <!-- Modal -->
+{% block modal %}
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -20,22 +21,19 @@ Library
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
             <form action="" method="post" novalidate>
+            <div class="modal-body">
                 {{ form.hidden_tag() }}
-                <p>
+                <div class="form-group">
                     {{ form.isbn.label }}<br>
-                    {{ form.isbn(size=32) }}
-                </p>
-                
-                <p>{{ form.submit() }}</p>
-                <p>{{ form.manual() }}</p>
-            </form>
-           </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                    {{ form.isbn(class_="form-control") }}
+                </div>
             </div>
+            <div class="modal-footer">
+                {{ form.submit(class_="btn btn-primary") }}
+                {{ form.manual(class_="btn btn-outline-secondary") }}
+            </div>
+            </form>
         </div>
     </div>
 </div>

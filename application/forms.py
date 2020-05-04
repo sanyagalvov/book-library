@@ -35,7 +35,7 @@ class AddBookForm(FlaskForm):
     image = StringField("Image's url",
             validators=[FileAllowed(["png", "jpeg", "jpg"], "Images only!")])
     description = TextAreaField("Notes")
-    submit = SubmitField("Add")
+    submit = SubmitField("Save")
 
 class ISBNAddForm(FlaskForm):
     isbn = StringField("Input your ISBN...")

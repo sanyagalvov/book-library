@@ -7,14 +7,20 @@
 {% block widget %}
 <form action="" method="post" novalidate>
     {{ form.hidden_tag() }}
-    <input id="edit" name="edit" type="submit" value="Edit" class="btn btn-outline-info">
-    <input id="delete" name="delete" type="submit" value="Delete" class="btn btn-outline-danger">
+    {{ form.edit(class_="btn btn-outline-info form-inline") }}
+    {{ form.delete(class_="btn btn-outline-danger form-inline") }}
 </form>
 {% endblock %}
 
 {% block content %}
-<img src="{{ book.image }}" class="" alt="...">
-<h4>{{ book.title }}</h4>
-<h5>{{ book.author }}</h5>
-<p>{{ book.description }}</p>
+<div class="row">
+<div class="col-auto align-content-center text-center">
+    <img src="{{ book.image }}" alt="...">
+</div>
+<div class="col">
+    <h2>{{ book.title }}</h2>
+    <h3>{{ book.author }}</h3>
+    <p>{{ book.description }}</p>
+</div>
+</div>
 {% endblock %}
