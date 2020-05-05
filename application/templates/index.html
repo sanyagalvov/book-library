@@ -40,11 +40,14 @@ Library
 {% endblock %}
 
 {% block content %}
+
+{% if books.count() > 0 %}
+
 <div class="justify-content-center">
 <div class="align-content-center row">
 {% for book in books %}
 <div class="card" style="width: 14rem;">
-    <img src="{{ book.image }}" class="card-img-top" alt="...">
+    <img src="{% if book.image != "default" %}{{ book.image }}{% else %}/static/placeholder.svg{% endif %}" class="card-img-top" alt="...">
     <div class="card-body">
         <h5 class="card-title">{{ book.title }}</h5>
         <p class="card-text">
@@ -56,4 +59,12 @@ Library
 {% endfor %}
 </div>
 </div>
+
+{% else %}
+<div class="row bg-light align-items-center justify-content-center flex-fill text-center">
+    <div class="col-12">
+        <h1>Hi!</h1>
+    </div>
+</div>
+{% endif %}
 {% endblock %}

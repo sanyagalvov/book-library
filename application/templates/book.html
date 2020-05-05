@@ -15,7 +15,7 @@
 {% block content %}
 <div class="row">
 <div class="col-auto align-content-center text-center">
-    <img src="{{ book.image }}" alt="...">
+    <img src="{% if book.image != "default" %}{{ book.image }}{% else %}/static/placeholder.svg{% endif %}" alt="..."style="min-width: 300px;">
 </div>
 <div class="col">
     <h2>{{ book.title }}</h2>

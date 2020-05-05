@@ -1,3 +1,5 @@
+import tempfile
+import validators
 import requests as req
 from flask_login import current_user
 from application.models import Book
@@ -30,3 +32,16 @@ def get_book_by_isbn(isbn):
                 user_id=current_user.id)
         return book
     return None
+
+def validate_cover(url):
+    if not validators.url(url):
+        return "default"
+    response = req.get(url)
+    if not response:
+        return "default"
+    with tempfile.NamedTemporaryFile() as temp:
+        temp.write(response.content)
+        temp.seek(0)
+        if imghdr.what(temp.name):
+            return url
+    return "default"

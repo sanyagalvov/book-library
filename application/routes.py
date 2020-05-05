@@ -8,9 +8,9 @@ from application import app, db
 from application.forms import LoginForm, RegistrationForm
 from application.forms import AddBookForm, ISBNAddForm, EditDeleteForm
 from application.models import User, Book
-from application.isbn import get_book_by_isbn
+from application.helpers import get_book_by_isbn, validate_cover
 
-@app.route("/")
+@app.route("/", methods=['GET', 'POST'])
 @app.route("/index", methods=['GET', 'POST'])
 def index():
     if not current_user.is_authenticated:
@@ -103,7 +103,7 @@ def edit(id):
     if form.validate_on_submit():
         book.title = form.title.data
         book.author = form.author.data
-        book.image = form.image.data
+        book.image = validate_cover(form.image.data)
         book.description = form.description.data
         db.session.commit()
         return redirect(url_for("book", id=book.id))
