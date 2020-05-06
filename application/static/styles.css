@@ -1,6 +1,14 @@
-.container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
+#outer {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+}
+ 
+#inner_fixed {
+  height: 100px;
+  background-color: grey;
+}
+ 
+#inner_remaining {
+  flex-grow : 1;
 }
