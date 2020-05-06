@@ -1,4 +1,5 @@
 import tempfile
+import imghdr
 import validators
 import requests as req
 from flask_login import current_user
