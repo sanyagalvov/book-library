@@ -72,7 +72,7 @@ def add(isbn):
     else:
         form = AddBookForm()
     if form.validate_on_submit():
-        image = form.image.data
+        image = validate_cover(form.image.data)
         book = Book(title=form.title.data, author=form.author.data,
                 image=image, user_id=current_user.id, description=form.description.data)
         db.session.add(book)
