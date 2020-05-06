@@ -34,3 +34,4 @@ wrapt==1.11.2
 WTForms==2.2.1
 gunicorn
 psycopg2
+imghdr
