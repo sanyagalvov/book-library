@@ -3,7 +3,9 @@
 {% block title %}Register{% endblock %}
 
 {% block content %}
-<div class="col-sm-3 pt-3">
+<div class="bgimg h-100 row text-center aling-items-center justify-content-center">
+<div class="col-lg-3 my-auto">
+    <div class="card bg-light p-3">
 <h1>Register</h1>
 <form action="" method="post">
     {{ form.hidden_tag() }}
@@ -37,5 +39,7 @@
     </div>
     {{ form.submit(class_="btn btn-primary") }} 
 </form>
+</div>
+</div>
 </div>
 {% endblock %}

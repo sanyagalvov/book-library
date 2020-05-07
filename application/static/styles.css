@@ -1,14 +1,21 @@
+@font-face { font-family: Rye; src: url('/static/Rye.ttf'); } 
+
 #outer {
   display: flex;
   flex-flow: column;
   height: 100%;
 }
  
-#inner_fixed {
-  height: 100px;
-  background-color: grey;
-}
- 
 #inner_remaining {
   flex-grow : 1;
+}
+
+.bgimg { 
+  /* The image used */
+  background-image: url("/static/background.jpg");
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
 }

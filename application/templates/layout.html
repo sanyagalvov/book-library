@@ -23,13 +23,29 @@
             <a class="navbar-brand" href="{{ url_for('index') }}">
                 <img src="/static/logo-v2.png" height="30" alt="">
             </a>
-            {% if current_user.is_anonymous %}
-            <a class="nav-link" href="{{ url_for('login') }}">Login</a>
-            <a class="nav-link" href="{{ url_for('register') }}">Register</a>
-            {% else %}
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
             {% block widget %}{% endblock %}
-            <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
-            {% endif %}
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto justify-content-end">
+                {% if current_user.is_anonymous %}
+                <li class="nav-item">
+                <a class="nav-item nav-link" href="{{ url_for('login') }}">Login</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('register') }}">Register</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('index') }}">Home</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+                </li>
+                {% endif %}
+                </ul>
+            </div>
         </nav>
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
