@@ -17,5 +17,5 @@
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
-  height: -webkit-fill-available!important;
+  min-height: -webkit-fill-available!important;
 }
