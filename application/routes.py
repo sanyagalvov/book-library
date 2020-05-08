@@ -15,13 +15,8 @@ from application.helpers import get_book_by_isbn, validate_cover
 def index():
     if not current_user.is_authenticated:
         return render_template('landing.html')
-    form = ISBNAddForm()
-    if form.validate_on_submit():
-        if form.isbn.data == "" or form.manual.data:
-            return redirect(url_for("add"))
-        return redirect(url_for("add", isbn=form.isbn.data))
     books = Book.query.filter_by(owner=current_user)
-    return render_template("index.html", books=books, form=form)
+    return render_template("index.html", books=books)
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():

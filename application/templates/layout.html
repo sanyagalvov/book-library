@@ -41,6 +41,9 @@
                 <a class="nav-link" href="{{ url_for('index') }}">Home</a>
                 </li>
                 <li class="nav-item">
+                <a href="" class="nav-link" data-toggle="modal" data-target="#exampleModal">Add</a>
+                </li>
+                <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
                 </li>
                 {% endif %}
@@ -63,5 +66,47 @@
         {% endblock %}
         {% block modal %}{% endblock %}
         </div>
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Book</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action=""id="isbn-form"method="get">
+            <div class="modal-body">
+                <div class="form-group">
+                    Enter your ISBN<br>
+                    <input class="form-control" id="isbn" name="isbn" type="text" value="">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input class="btn btn-primary" type="submit" value="Add via ISBN" onclick="return ISBNValidate(this)">
+                <input class="btn btn-outline-secondary" type="submit" value="Add Manually" onclick="return ISBNValidate(this)">
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+    <script>
+        function ISBNValidate(button) {
+            if (button.value == "Add Manually"){
+                window.location.href = "/add";
+            }
+            else {
+                if (document.getElementById("isbn").value == "")
+                {
+                    window.location.href = "/add";
+                }
+                else {
+                    window.location.href = "/add/" + document.getElementById("isbn").value;
+                }
+            }
+            return false;
+        }
+        </script>
     </body>
 </html>
