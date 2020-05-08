@@ -5,8 +5,9 @@ Edit Book
 {% endblock %}
 
 {% block content %}
-
-<div class="col-sm-4">
+<div class="bgimg h-100 row text-center aling-items-center justify-content-center">
+<div class="col my-auto mx-auto">
+<div style="max-width: 330px;" class="card bg-light p-3 mx-auto">
     <h1>Edit Book</h1>
 <form action="" method="post" novalidate>
 {{ form.hidden_tag() }}
@@ -37,8 +38,13 @@ Edit Book
     <div class="form-group">
     {{ form.description.label }}<br>
     {{ form.description(class_="form-control") }}
+    {% for error in form.description.errors %}
+    <span style="color: red;">{{ error }}</span>
+    {% endfor %}
     </div>
     {{ form.submit(class_="btn btn-primary") }}
 </form>
+</div>
+</div>
 </div>
 {% endblock %}

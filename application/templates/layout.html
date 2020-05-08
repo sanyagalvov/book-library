@@ -19,16 +19,16 @@
         <title>{% block title %}{% endblock %}</title>
     </head>
     <body id="outer">
-        <nav class="navbar sticky-top border-bottom navbar-expand navbar-light bg-light">
+        <nav class="navbar sticky-top border-bottom navbar-expand-sm navbar-light bg-light">
             <a class="navbar-brand" href="{{ url_for('index') }}">
                 <img src="/static/logo-v2.png" height="30" alt="">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            {% block widget %}{% endblock %}
+
             <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto justify-content-end">
+                <ul class="navbar-nav mr-auto jmt-2 mt-lg-0 justify-content-end">
                 {% if current_user.is_anonymous %}
                 <li class="nav-item">
                 <a class="nav-item nav-link" href="{{ url_for('login') }}">Login</a>
@@ -44,6 +44,7 @@
                 <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
                 </li>
                 {% endif %}
+                {% block widget %}{% endblock %}
                 </ul>
             </div>
         </nav>

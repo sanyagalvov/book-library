@@ -43,19 +43,21 @@ Library
 
 {% if books.count() > 0 %}
 
-<div class="justify-content-center">
-<div class="align-content-center row">
-{% for book in books %}
-<div class="card" style="width: 14rem;">
-    <img src="{% if book.image != "default" %}{{ book.image }}{% else %}/static/placeholder.svg{% endif %}" class="card-img-top" alt="...">
-    <div class="card-body">
-        <h5 class="card-title">{{ book.title }}</h5>
-        <p class="card-text">
-            {{ book.author }}
-        </p>
-        <a href="{{ url_for("book", id=book.id) }}" class="card-link stretched-link">Open</a>
-    </div>
+<div class="row bgimg h-100 align-content-center justify-content-center">
+    <div class="col-lg row align-content-center mx-auto justify-content-start">
+        {% for book in books %}
+
+        <div class="card m-1" style="width: 14rem;">
+            <img src="{% if book.image != "default" %}{{ book.image }}{% else %}/static/placeholder.svg{% endif %}" class="card-img-top" alt="...">
+            <div class="card-body">
+            <h5 class="card-title">{{ book.title }}</h5>
+            <a class="btn btn-primary stretched-link" href="{{ url_for("book", id=book.id) }}" role="button">
+             Open
+            </a>
+        </div>
+    <a class="stretched-link" href="{{ url_for("book", id=book.id) }}"></a>
 </div>
+
 {% endfor %}
 </div>
 </div>

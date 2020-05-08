@@ -1,5 +1,4 @@
-@font-face { font-family: Rye; src: url('/static/Rye.ttf'); } 
-
+@import url('https://fonts.googleapis.com/css2?family=Rye&display=swap');
 #outer {
   display: flex;
   flex-flow: column;
@@ -18,4 +17,5 @@
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
+  height: -webkit-fill-available!important;
 }
