@@ -17,7 +17,7 @@
 <div class="col-md-auto my-auto mx-auto text-center aling-items-center justify-content-center">
 <div class="card my-auto p-3 flex-md-row">
     <img src="{% if book.image != "default" %}{{ book.image }}{% else %}/static/placeholder.svg{% endif %}" alt="..."style="width: 20rem; height: auto;" class="img-fluid mx-auto card-img-top">
-    <div class="flex-column mb-auto mx-2">
+    <div class="flex-column mb-auto mx-2 align-items-start justify-items-start">
     <h2>{{ book.title }}</h2>
     <h3>{{ book.author }}</h3>
     <p>{{ book.description }}</p>
